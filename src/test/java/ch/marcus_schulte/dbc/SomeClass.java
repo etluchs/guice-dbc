@@ -10,6 +10,11 @@ public class SomeClass implements SomeContract {
      int y;
      int z;
 
+    @IsInvariant
+    public boolean zIsXPlusY() {
+        return z == x + y;
+    }
+
     @Override
     public void firr(int f){
         x = 1*f;

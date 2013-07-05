@@ -4,6 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.matcher.AbstractMatcher;
 import com.google.inject.matcher.Matchers;
 
+import java.lang.reflect.Method;
+
 /**
  * @author marcus
  * @since 03.07.13
@@ -22,6 +24,10 @@ public class DbcModule extends AbstractModule {
                 return true;
             for (Class anIf : aClass.getInterfaces()) {
                 if ( matches(anIf) )
+                    return true;
+            }
+            for (Method method : aClass.getMethods()) {
+                if ( method.getAnnotation(IsInvariant.class) != null)
                     return true;
             }
             return false;
